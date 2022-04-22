@@ -25,9 +25,9 @@ class Product extends Model
         $this->attributes['name'] = strtoupper($string);
     }
 
-    function getPriceAttribute($string) {
-        return '$' . $string;
-    }
+    // function getPriceAttribute($string) {
+    //     return '$' . $string;
+    // }
     protected $cast = [
         'created_at'    =>  'Y-m-d'
     ];

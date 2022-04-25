@@ -2,22 +2,30 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    Log::emergency("Emergency Log");
-    Log::alert("Alert Log");
-    Log::critical("Critical Log");
-    Log::error("Error Log");
-    Log::warning("Warning Log");
-    Log::notice("Notice Log");
-    Log::info("Info Log");
-    Log::debug("Debug Log");
-});
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
-Route::get('/user', function () {
-    Log::emergency("Emergency Log", ['user_id'=>rand(1000,9999)]);
-});
 
-Route::get('div', function() {
-    $division = 5 / 0;
-    echo $division;
+Route::get('/', function() {
+
+    $user = User::select('*')
+        ->where('id', 2)
+        ->first();
+
+    echo $user->password; // password
+
+    echo '<br />';
+
+    $currentPassword = '123456';
+
+    echo Hash::make($currentPassword);
+
+    echo '<br />';
+
+    echo strcmp($user->password, $currentPassword);
+
+    echo '<br />';
+
+    echo Hash::check($currentPassword, $user->password) ? 'Yes' : 'No';
+
 });

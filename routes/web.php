@@ -1,32 +1,19 @@
 <?php
 
+
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
-use App\Models\User;
-use App\Http\Controllers\LanguageSwitchController;
-use App\Mail\NewUserMail;
-use App\Mail\NewOrderMail;
-use App\Mail\OrderShipped;
-use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\MySessionController;
 
+Route::get('/', [MySessionController::class, 'setSessionValue']);
 
-Route::get('/', function() {
-    return view('welcome');
+Route::get('/get-session', [MySessionController::class, 'getSessionValue']);
+Route::get('/delete', [MySessionController::class, 'getDeleteSession']);
+Route::get('/all', [MySessionController::class, 'getAll']);
+Route::get('/cfn', [MySessionController::class, 'checkForName']);
+Route::get('/cfmd', [MySessionController::class, 'checkForMissingDiscountCode']);
+
+Route::get('/inc', function(Request $request) {
+    echo $request->session()->increment('count', rand(1,9));
 });
-
-Route::get('/send', function() {
-    $newUserEmail = 'avinash.seth@outlook.com';
-    Mail::to($newUserEmail)->send(new NewUserMail());
-});
-
-Route::get('/order', function() {
-    $orderDetails = ['order_number' => rand(10000,99999)];
-    $userEmail = 'avinash.seth@outlook.com';
-    Mail::to($userEmail)->send(new NewOrderMail($orderDetails));
-});
-
-Route::get('/shipped', function() {
-    Mail::to('avinash.seth@outlook.com')->send(new OrderShipped());
-});
-
-Route::get('set-language/{language}', [LanguageSwitchController::class, 'changeLanguage'])->name('language-switch');

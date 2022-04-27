@@ -8,23 +8,27 @@
     <style>
         .red {
             background: red;
-            color: white;
             padding: 5px;
+        }
+        .grey {
+            border: 5px solid grey;
+        }
+        .white {
+            color: white;
         }
     </style>
 </head>
 <body>
-    @foreach ($users as $user)
-        @if ($loop->first)
-            This is the first iteration.
-        @endif
-    
-        @if ($loop->last)
-            This is the last iteration.
-        @endif
+    @php
+        $isActive = rand(0,1);
+        $hasError = rand(0,1);
+    @endphp
+ 
+    <span @class([
+        'white' => $isActive,
+        'grey' => ! $isActive,
+        'red' => $hasError,
+    ])>Hi</span>
 
-        <p>This is user {{ $user->id . ' ' . $loop->index }}</p>
-
-    @endforeach
 </body>
 </html>

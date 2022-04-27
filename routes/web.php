@@ -6,11 +6,8 @@ use Illuminate\Http\Request;
 
 Route::get('/', function() {
 
-    $users = \App\Models\User::select('name', 'email', 'email_verified_at')
-        ->orderBy('id', 'desc')
-        ->limit(10)
-        ->get();
+    $age = 17;
 
-    return view('working_with', compact('users'));
+    return view('working_with', compact('age'));
 
 });

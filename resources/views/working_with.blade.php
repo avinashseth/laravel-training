@@ -14,10 +14,12 @@
     </style>
 </head>
 <body>
-    
-    <script>
-        let app = {{ Js::from($users) }};
-        console.log(app);
-    </script>
+    @if($age > 18)
+        You can vote
+    @elseif($age >= 16 && $age < 18)
+        You are not allowed to vote but you can see how to vote
+    @else
+        You cannot vote
+    @endif
 </body>
 </html>

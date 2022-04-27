@@ -14,12 +14,16 @@
     </style>
 </head>
 <body>
-    @auth
-        Logged In
-    @endauth
+    @production
+        This is Production Server
+    @endproduction
 
-    @guest
-        Please Login as you are guest right now
-    @endguest
+    @env('local')
+        This is Localhost
+    @endenv
+
+    @env(['local', 'staging'])
+        This is localhost and staging server
+    @endenv
 </body>
 </html>

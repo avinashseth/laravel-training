@@ -51,6 +51,20 @@ Route::get('/inc', function(Request $request) {
     echo $request->session()->increment('count', rand(1,9));
 });
 
-Auth::routes();
+Route::get('/admin', function() {
+    echo 'Super Secret Page';
+})->middleware('auth');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/check-age/{age}', function($age) {
+    if($age > 18) {
+        echo 'You can vote';
+    } else {
+        echo 'You cannot vote';
+    }
+})->middleware('auth');
+
+Auth::routes(['verify'=>true]);
+// Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified');

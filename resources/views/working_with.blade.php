@@ -12,19 +12,12 @@
             padding: 5px;
         }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 </head>
 <body>
-    <div id="app">
-        {{ $message }}
-    </div>
+    
     <script>
-        var app = new Vue({
-            el: '#app',
-            data: {
-                message: 'Hello World from Laravel + Vue!'
-            }
-        })
+        let app = {{ Js::from($users) }};
+        console.log(app);
     </script>
 </body>
 </html>

@@ -6,8 +6,11 @@ use Illuminate\Http\Request;
 
 Route::get('/', function() {
 
-    $message = '<p class="red">Account not found</p>';
+    $users = \App\Models\User::select('name', 'email', 'email_verified_at')
+        ->orderBy('id', 'desc')
+        ->limit(10)
+        ->get();
 
-    return view('working_with', compact('message'));
+    return view('working_with', compact('users'));
 
 });

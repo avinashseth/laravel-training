@@ -14,18 +14,12 @@
     </style>
 </head>
 <body>
-    @isset($users)
-        @php
-            print_r($users);
-        @endphp
-    @else
-        Users variable not defined <br />
-    @endisset
+    @auth
+        Logged In
+    @endauth
 
-    @empty($users)
-        You don't have anybody in your friends list right now
-    @else
-        You have friends in your friends list
-    @endempty
+    @guest
+        Please Login as you are guest right now
+    @endguest
 </body>
 </html>

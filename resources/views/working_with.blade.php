@@ -11,23 +11,13 @@
 <body>
 
     @php
-        $userConsent = true;
+        $fullName = 'Avinash Seth';
     @endphp
 
-    <input name='active' type="checkbox" @checked(old('active', $userConsent)) /> You agree to sell your data
+    @include('partials.menu')
 
-    @php
-        $product['versions'] = [1,2,3,4];
-    @endphp
-
-    <select name="version">
-        @foreach ($product['versions'] as $version)
-            <option value="{{ $version }}" @selected(old('version') == $version)>
-                {{ $version }}
-            </option>
-        @endforeach
-    </select>
+    <h1>About Us</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non adipisci dolor molestiae odit! Maiores, laboriosam ea! Culpa quae laudantium, temporibus fugiat labore ratione eligendi dolorum soluta odio, molestias, consectetur eum!</p>
     
-
 </body>
 </html>

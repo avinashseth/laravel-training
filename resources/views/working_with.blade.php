@@ -6,29 +6,28 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Working with Blade</title>
     <style>
-        .red {
-            background: red;
-            padding: 5px;
-        }
-        .grey {
-            border: 5px solid grey;
-        }
-        .white {
-            color: white;
-        }
     </style>
 </head>
 <body>
+
     @php
-        $isActive = rand(0,1);
-        $hasError = rand(0,1);
+        $userConsent = true;
     @endphp
- 
-    <span @class([
-        'white' => $isActive,
-        'grey' => ! $isActive,
-        'red' => $hasError,
-    ])>Hi</span>
+
+    <input name='active' type="checkbox" @checked(old('active', $userConsent)) /> You agree to sell your data
+
+    @php
+        $product['versions'] = [1,2,3,4];
+    @endphp
+
+    <select name="version">
+        @foreach ($product['versions'] as $version)
+            <option value="{{ $version }}" @selected(old('version') == $version)>
+                {{ $version }}
+            </option>
+        @endforeach
+    </select>
+    
 
 </body>
 </html>

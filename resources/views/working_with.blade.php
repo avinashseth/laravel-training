@@ -14,11 +14,17 @@
     </style>
 </head>
 <body>
-    @forelse ($users as $user)
-        <li>{{ $user->name }}</li>
-    @empty
-        <p>No users</p>
-    @endforelse
+    @foreach ($users as $user)
+        @if ($loop->first)
+            This is the first iteration.
+        @endif
+    
+        @if ($loop->last)
+            This is the last iteration.
+        @endif
 
+        <p>This is user {{ $user->id . ' ' . $loop->index }}</p>
+
+    @endforeach
 </body>
 </html>

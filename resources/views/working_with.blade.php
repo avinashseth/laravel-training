@@ -14,16 +14,11 @@
     </style>
 </head>
 <body>
-    @production
-        This is Production Server
-    @endproduction
+    @forelse ($users as $user)
+        <li>{{ $user->name }}</li>
+    @empty
+        <p>No users</p>
+    @endforelse
 
-    @env('local')
-        This is Localhost
-    @endenv
-
-    @env(['local', 'staging'])
-        This is localhost and staging server
-    @endenv
 </body>
 </html>

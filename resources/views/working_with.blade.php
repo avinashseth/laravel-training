@@ -14,12 +14,8 @@
     </style>
 </head>
 <body>
-    @if($age > 18)
-        You can vote
-    @elseif($age >= 16 && $age < 18)
-        You are not allowed to vote but you can see how to vote
-    @else
-        You cannot vote
-    @endif
+    @unless(!Auth::check())
+        Please login to check this data
+    @endunless
 </body>
 </html>

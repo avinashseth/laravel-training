@@ -14,8 +14,18 @@
     </style>
 </head>
 <body>
-    @unless(!Auth::check())
-        Please login to check this data
-    @endunless
+    @isset($users)
+        @php
+            print_r($users);
+        @endphp
+    @else
+        Users variable not defined <br />
+    @endisset
+
+    @empty($users)
+        You don't have anybody in your friends list right now
+    @else
+        You have friends in your friends list
+    @endempty
 </body>
 </html>

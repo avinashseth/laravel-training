@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 
 Route::get('/', function() {
 
-    $age = 17;
+    $users = ['Avinash'];
 
-    return view('working_with', compact('age'));
+    return view('working_with', compact('users'));
 
 });

@@ -4,12 +4,10 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
+Route::get('/login', function() {
+    echo 'Login to continue';
+});
+
 Route::get('/', function() {
-
-    $users = \App\Models\User::limit(10)->get();
-
-    return view('working_with', compact('users'));
-
-    // return view('working_with');
-
+    return view('working_with');
 });

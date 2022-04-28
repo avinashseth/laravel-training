@@ -10,4 +10,6 @@ Route::get('/', function() {
 
     return view('working_with', compact('users'));
 
+    // return view('working_with');
+
 });

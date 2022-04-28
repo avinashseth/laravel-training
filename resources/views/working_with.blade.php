@@ -4,24 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Working with Alerts</title>
-    <style>
-        .alert-box {
-            color: white;
-            background: red;
-            padding: 5px;
-        }
-        .alert-green {
-            color: white;
-            background: green;
-            padding: 5px;
-        }
-    </style>
+    <title>Working with Laravel Mix</title>
+    <link rel="stylesheet" href="/css/app.css">
 </head>
 <body>
-    <x-alert alerttype="danger" message="Invalid Login Credentials" />
-    <x-alert alerttype="success" message="Payment done succesffuly" />
-
-    <x-login formurl="https://google.com" />
+    hi
+    <p>Hello world</p>
+    <button>Click here</button>
+    <div>this si a div</div>
 </body>
 </html>

@@ -11,3 +11,7 @@ Route::get('/login', function() {
 Route::get('/', function() {
     return view('working_with');
 });
+
+Route::get('/check-vote/{age}', function($age) {
+    return view('check-age', ['age'=>$age]);
+});

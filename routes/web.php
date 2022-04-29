@@ -25,3 +25,7 @@ Route::get('/users', function() {
     return view('user-list', ['users'=>$users]);
 
 });
+
+Route::get('/hello-world', function() {
+    return view('hello-world');
+});

@@ -4,28 +4,6 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
-Route::get('/login', function() {
-    echo 'Login to continue';
-});
+Auth::routes();
 
-Route::get('/', function() {
-    return view('working_with');
-});
-
-Route::get('/check-vote/{age}', function($age) {
-    return view('check-age', ['age'=>$age]);
-});
-
-Route::get('/users', function() {
-
-    $users = \App\Models\User::select('id', 'name')
-        ->limit(2)
-        ->get();
-
-    return view('user-list', ['users'=>$users]);
-
-});
-
-Route::get('/hello-world', function() {
-    return view('hello-world');
-});
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

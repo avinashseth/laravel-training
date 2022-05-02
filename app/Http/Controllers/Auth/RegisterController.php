@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Laravel\Socialite\Facades\Socialite;
+use Auth;
 
 class RegisterController extends Controller
 {
@@ -70,5 +72,22 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'language'=>$data['language']
         ]);
+    }
+    public function redirectToProvider()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+    public function handleProviderCallback()
+    {
+        $googleUser = Socialite::driver('google')->user();
+        $newUser = new User;
+        $newUser->name = $googleUser->name;
+        $newUser->email = $googleUser->email;
+        $newUser->password = rand(10000,99999);
+        $newUser->language = 'en';
+        $newUser->save();
+        Auth::login($newUser);
+        return redirect('/home');
+        // dd($user);
     }
 }

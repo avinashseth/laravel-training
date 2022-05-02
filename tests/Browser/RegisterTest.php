@@ -15,10 +15,11 @@ class RegisterTest extends DuskTestCase
      */
     public function testExample()
     {
-        $this->browse(function (Browser $browser) {
+        $newEmail = 'avinash' . rand(100,999) . '@yahoo.com';
+        $this->browse(function (Browser $browser) use ($newEmail) {
             $browser->visit('/register')
                 ->value('#name', 'Avinash Seth')
-                ->value('#email', 'avinash' . rand(100,999) . '@yahoo.co.in')
+                ->value('#email', $newEmail)
                 ->value('#password', '12345678')
                 ->value('#password-confirm', '12345678')
                 ->value('#language_pref', 'EN')
@@ -26,5 +27,11 @@ class RegisterTest extends DuskTestCase
                 ->assertPathIs('/home')
                 ->assertSee("You are logged in!"); 
         });
+        $this->assertDatabaseHas('users', [
+            'email' => $newEmail,
+        ]);
+        $this->assertDatabaseHas('students', [
+            'username' => 'bybgBqlNEt'
+        ]);
     }
 }

@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Models\User;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -25,4 +26,15 @@ Route::post('person', function(Request $request) {
         ]
     );
 
+});
+
+Route::prefix('user')->group(function() {
+    Route::post('verify-user', function(Request $request) {
+        return response()->json(['status'=>true,'message'=>'Your email ' . $request->email . ' is Unique Email']);
+    });
+});
+
+Route::get('users', function(Request $request) {
+    $user = User::limit($request->limit)->get()->toJson();
+    return $user;
 });

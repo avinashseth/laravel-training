@@ -1,0 +1,1 @@
+{{ print_r(json_decode($user)) }}

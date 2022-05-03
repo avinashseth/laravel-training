@@ -21,4 +21,20 @@ class FileController extends Controller
         return redirect()->back();
 
     }
+
+    function postUploadToAws(Request $request) {
+
+        $request->validate([
+            'myfile' => 'required', // size:1024 in kilobyte
+        ]);
+
+        $fileName = time() . '.' . $request->myfile->extension();
+        
+        $request->myfile->storeAs('files', $fileName, 's3');
+        
+        $request->session()->flash('file_upload_feedback', 'File Uploaded Successfully');
+        
+        return redirect()->back();
+    }
+
 }

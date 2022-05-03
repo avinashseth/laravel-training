@@ -1,4 +1,4 @@
-<form action="{{ route('post-upload-file') }}" method="post" enctype="multipart/form-data">
+<form action="{{ route('post-upload-s3') }}" method="post" enctype="multipart/form-data">
     @csrf
     <p>{{ Session::get('file_upload_feedback') }}</p>
     <p><input type="file" name="myfile" id="myfile" /></p>

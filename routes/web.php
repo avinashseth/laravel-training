@@ -5,16 +5,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\PaymentReminderController;
+use App\Http\Controllers\PhotoController;
 
 use App\Models\User;
 
-Route::prefix('user')->group(function() {
-    Route::view('/', 'user.hi');
-});
-
-Route::get('users/{limit}', function(Request $request, $limit) {
-    $user = User::limit($request->limit)->get()->toJson();
-    return view('myusers', compact('user'));
-});
-
-Route::get('test-email', [PaymentReminderController::class, 'enqueue']);
+Route::get('photo/{username}/comment', [PhotoController::class, 'getNotifyUserForNewComment'])->name('get-notify-user-for-comment');

@@ -31,7 +31,7 @@ class RequestCallBackNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail', 'database','logs'];
+        return ['database', 'mail'];
     }
 
     /**

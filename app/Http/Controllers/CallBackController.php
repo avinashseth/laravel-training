@@ -25,8 +25,25 @@ class CallBackController extends Controller
                     'user_id' => 101,
                     'callback_date_time' => $random
                 ];
-        // Notification::send($user, new RequestCallBackNotification($details));
-        Notification::send($user, new PaymentDeclined());
+        Notification::send($user, new RequestCallBackNotification($details));
+        // Notification::send($user, new PaymentDeclined());
+    }
+
+    function getNotifications(Request $request) {
+        $user = \App\Models\User::find(1); // 1 is user id of User Model
+        // fetch all notifications
+        // foreach ($user->notifications as $notification) {
+        //     echo '<p>' . $notification->type . '</p>';
+        // }
+        // fetch all unread notifications
+        // foreach ($user->unreadNotifications as $notification) {
+        //     echo '<pre>' , print_r($notification) , '</pre>';
+        // }
+        // marking notifications as read
+        // foreach ($user->unreadNotifications as $notification) {
+        //     $notification->markAsRead();
+        // }
+
     }
 
 }

@@ -3,36 +3,20 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use App\Models\Student;
 
-use Illuminate\Support\Facades\Crypt;
+Auth::routes();
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('encrypt-data/{data_string}', function(Request $request) {
-    // for($i = 0; $i < 4; $i++) 
-    // {
-    //     $data = array(
-    //         'date' => Carbon\Carbon::now(),
-    //         'payload' => $request->data_string
-    //     );
-    //     // echo json_encode($data);
-    //     $key = Crypt::encryptString(json_encode($data));
-    //     echo '<a href="/d/' . $key . '">' . $key . '</a><br />';
+Route::get('update-this-student/{student}', function(Request $request) {
 
-    // }
-    $user = \App\Models\User::where('id',1)
-        ->first()
-        ->toJson();
-    // echo Crypt::encryptString($user);
-    echo '<a href="/d/' . Crypt::encryptString($user) . '">Decrypt</a><br />';
-    // echo '<a href="/d/' . Crypt::encryptString($request->data_string) . '">Decrypt</a><br />';
-    // echo '<a href="/d/' . Crypt::encryptString($request->data_string) . '">Decrypt</a><br />';
-    // echo '<a href="/d/' . Crypt::encryptString($request->data_string) . '">Decrypt</a><br />';
-});
+    $student = Student::where('id', $request->student)
+        ->first();
 
-Route::get('/d/{token}', function(Request $request) {
-    try {
-        $decrypted = Crypt::decryptString($request->token);
-        echo $decrypted;
-    } catch (Expection $e) {
-        echo "Something not right";
+    if (! Gate::allows('update-student', $student)) {
+        abort(403);
     }
+
+    echo 'You can now update this student';
+
 });

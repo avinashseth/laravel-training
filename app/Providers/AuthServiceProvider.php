@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use App\Models\Student;
+use App\Models\User;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -25,6 +27,11 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('update-student', function (User $user, Student $student) {
+
+            return $user->id === $student->user_id;
+
+        });
+
     }
 }

@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Auth\Access\Response;
 use App\Models\Student;
 use App\Models\User;
 
@@ -31,6 +32,12 @@ class AuthServiceProvider extends ServiceProvider
 
             return str_contains($user->roles, 'update-student');
             // $user->id === $student->user_id;
+
+        });
+
+        Gate::define('delete-student', function(User $user, Student $student) {
+
+            return $user->id === $student->user_id ? Response::allow('You can delete this user') : Response::deny('You must be an administrator.');
 
         });
 

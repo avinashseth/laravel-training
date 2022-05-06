@@ -10,40 +10,30 @@ use App\Models\User;
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('update-this-student/{student}', function(Request $request) {
+Route::get('update-student/{student}', function(Request $request) {
 
-    // $student = Student::where('id', $request->student)
-    //     ->first();
+    $student = Student::where('id', $request->student)->first();
 
-    // dd(Auth::user());
+    $user = Auth::user();
 
-    $user = User::find(5);
-
-    if (! Gate::forUser($user)->allows('update-student')) {
-        abort(403);
+    if($user->can('update', $student))
+    {
+        echo 'update';
     }
-
-    echo 'You can now update this student';
-
+    else
+    {
+        echo 'cannot update';
+    }
 });
 
-Route::get('delete-student', function() {
+Route::get('delete', function() {
 
-    $student = Student::find(2);
+    $user = Auth::user();
 
-    // if (! Gate::allows('delete-student', $student)) {
-    //     abort(403);
-    // }
-
-    // echo 'You have deleted the student';
-
-    $response = Gate::inspect('delete-student', $student);
- 
-    if ($response->allowed()) {
-        // The action is authorized...
+    if($user->can('delete')) {
+        echo 'you can delete';
     } else {
-        echo $response->message();
+        echo 'you cannot delete';
     }
-
 
 });

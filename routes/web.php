@@ -10,10 +10,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('update-this-student/{student}', function(Request $request) {
 
-    $student = Student::where('id', $request->student)
-        ->first();
+    // $student = Student::where('id', $request->student)
+    //     ->first();
 
-    if (! Gate::allows('update-student', $student)) {
+    // dd(Auth::user());
+
+    if (! Gate::allows('update-student')) {
         abort(403);
     }
 

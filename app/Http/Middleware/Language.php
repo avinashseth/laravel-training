@@ -19,15 +19,15 @@ class Language
      */
     public function handle(Request $request, Closure $next)
     {
-            $language = User::select('language')
-                ->where('id', 1) // ideally Auth::user()->id
-                ->first();
+            // $language = User::select('language')
+            //     ->where('id', 1) // ideally Auth::user()->id
+            //     ->first();
 
-            if($language) {
-                App::setLocale($language->language);
-            } else {
-                App::setLocale('en');
-            }
+            // if($language) {
+            //     App::setLocale($language->language);
+            // } else {
+            //     App::setLocale('en');
+            // }
 
         return $next($request);
     }
